@@ -35,12 +35,12 @@ const createSiteMenuTemplate = () => {
   );
 };
 
-const render = (container, template, place = 'beforeend') => {
+const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
 
-const siteMainElement = document.querySelector('.main');
-const siteHeaderElement = siteMainElement.querySelector('.main__control');
+const siteMainElement = document.querySelector(`.main`);
+const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
 
 render(siteHeaderElement, createSiteMenuTemplate());
 
@@ -121,8 +121,8 @@ const createBoardTemplate = () => {
     <div class="board__tasks">
     </div>
     </section>`
-  )
-}
+  );
+};
 
 const createTaskEditTemplate = () => {
   return (
@@ -383,8 +383,8 @@ const createLoadBtnTemplate = () => {
 render(siteMainElement, createFilterTemplate());
 render(siteMainElement, createBoardTemplate());
 
-const  taskBoard = siteMainElement.querySelector('.board');
-const  taskBoardList = taskBoard.querySelector('.board__tasks');
+const taskBoard = siteMainElement.querySelector(`.board`);
+const taskBoardList = taskBoard.querySelector(`.board__tasks`);
 
 render(taskBoardList, createTaskEditTemplate());
 
