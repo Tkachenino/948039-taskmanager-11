@@ -35,6 +35,15 @@ const createSiteMenuTemplate = () => {
   );
 };
 
+const render = (container, template, place = `beforeend`) => {
+  container.insertAdjacentHTML(place, template);
+};
+
+const siteMainElement = document.querySelector(`.main`);
+const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
+
+render(siteHeaderElement, createSiteMenuTemplate());
+
 const createFilterTemplate = () => {
   return (
     `
@@ -371,14 +380,6 @@ const createLoadBtnTemplate = () => {
   );
 };
 
-const render = (container, template, place = `beforeend`) => {
-  container.insertAdjacentHTML(place, template);
-};
-
-const siteMainElement = document.querySelector(`.main`);
-const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
-
-render(siteHeaderElement, createSiteMenuTemplate());
 render(siteMainElement, createFilterTemplate());
 render(siteMainElement, createBoardTemplate());
 
