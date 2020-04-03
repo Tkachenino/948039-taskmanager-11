@@ -1,9 +1,9 @@
-import {createSiteMenuTemplate} from "./components/SiteMenuTemplate.js";
-import {createFilterTemplate} from "./components/filterTemplate.js";
-import {createBoardTemplate} from "./components/boardTemplate.js";
-import {createTaskEditTemplate} from "./components/taskEditTemplate.js";
-import {createTaskTemplate} from "./components/taskTemplate.js";
-import {createLoadBtnTemplate} from "./components/loadBtnTemplate.js";
+import {createSiteMenuTemplate} from "@/components/siteMenuTemplate.js";
+import {createFilterTemplate} from "@/components/filterTemplate.js";
+import {createBoardTemplate} from "@/components/boardTemplate.js";
+import {createTaskEditTemplate} from "@/components/taskEditTemplate.js";
+import {createTaskTemplate} from "@/components/taskTemplate.js";
+import {createLoadBtnTemplate} from "@/components/loadBtnTemplate.js";
 
 const COUNT_TASK = 3;
 

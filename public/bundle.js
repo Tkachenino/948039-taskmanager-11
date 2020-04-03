@@ -86,52 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/components/SiteMenuTemplate.js":
-/*!********************************************!*\
-  !*** ./src/components/SiteMenuTemplate.js ***!
-  \********************************************/
-/*! exports provided: createSiteMenuTemplate */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSiteMenuTemplate", function() { return createSiteMenuTemplate; });
-const createSiteMenuTemplate = () => {
-  return (
-    ` <section class="control__btn-wrap">
-    <input
-      type="radio"
-      name="control"
-      id="control__new-task"
-      class="control__input visually-hidden"
-    />
-    <label for="control__new-task" class="control__label control__label--new-task"
-      >+ ADD NEW TASK</label
-    >
-    <input
-      type="radio"
-      name="control"
-      id="control__task"
-      class="control__input visually-hidden"
-      checked
-    />
-    <label for="control__task" class="control__label">TASKS</label>
-    <input
-      type="radio"
-      name="control"
-      id="control__statistic"
-      class="control__input visually-hidden"
-    />
-    <label for="control__statistic" class="control__label"
-      >STATISTICS</label
-    >
-  </section>`
-  );
-};
-
-
-/***/ }),
-
 /***/ "./src/components/boardTemplate.js":
 /*!*****************************************!*\
   !*** ./src/components/boardTemplate.js ***!
@@ -251,6 +205,52 @@ __webpack_require__.r(__webpack_exports__);
 const createLoadBtnTemplate = () => {
   return (
     `<button class="load-more" type="button">load more</button>`
+  );
+};
+
+
+/***/ }),
+
+/***/ "./src/components/siteMenuTemplate.js":
+/*!********************************************!*\
+  !*** ./src/components/siteMenuTemplate.js ***!
+  \********************************************/
+/*! exports provided: createSiteMenuTemplate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSiteMenuTemplate", function() { return createSiteMenuTemplate; });
+const createSiteMenuTemplate = () => {
+  return (
+    ` <section class="control__btn-wrap">
+    <input
+      type="radio"
+      name="control"
+      id="control__new-task"
+      class="control__input visually-hidden"
+    />
+    <label for="control__new-task" class="control__label control__label--new-task"
+      >+ ADD NEW TASK</label
+    >
+    <input
+      type="radio"
+      name="control"
+      id="control__task"
+      class="control__input visually-hidden"
+      checked
+    />
+    <label for="control__task" class="control__label">TASKS</label>
+    <input
+      type="radio"
+      name="control"
+      id="control__statistic"
+      class="control__input visually-hidden"
+    />
+    <label for="control__statistic" class="control__label"
+      >STATISTICS</label
+    >
+  </section>`
   );
 };
 
@@ -542,7 +542,7 @@ const createTaskTemplate = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_SiteMenuTemplate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/SiteMenuTemplate.js */ "./src/components/SiteMenuTemplate.js");
+/* harmony import */ var _components_siteMenuTemplate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/siteMenuTemplate.js */ "./src/components/siteMenuTemplate.js");
 /* harmony import */ var _components_filterTemplate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/filterTemplate.js */ "./src/components/filterTemplate.js");
 /* harmony import */ var _components_boardTemplate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/boardTemplate.js */ "./src/components/boardTemplate.js");
 /* harmony import */ var _components_taskEditTemplate_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/taskEditTemplate.js */ "./src/components/taskEditTemplate.js");
@@ -564,7 +564,7 @@ const render = (container, template, place = `beforeend`) => {
 const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
 
-render(siteHeaderElement, Object(_components_SiteMenuTemplate_js__WEBPACK_IMPORTED_MODULE_0__["createSiteMenuTemplate"])());
+render(siteHeaderElement, Object(_components_siteMenuTemplate_js__WEBPACK_IMPORTED_MODULE_0__["createSiteMenuTemplate"])());
 render(siteMainElement, Object(_components_filterTemplate_js__WEBPACK_IMPORTED_MODULE_1__["createFilterTemplate"])());
 render(siteMainElement, Object(_components_boardTemplate_js__WEBPACK_IMPORTED_MODULE_2__["createBoardTemplate"])());
 
