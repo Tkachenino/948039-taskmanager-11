@@ -124,67 +124,31 @@ const createBoardTemplate = () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFilterTemplate", function() { return createFilterTemplate; });
-const createFilterTemplate = () => {
+const createFilterMarkup = (filter, isChecked) => {
+  const {name, count} = filter;
+  return (
+    `
+    <input
+        type="radio"
+        id="filter__${name}"
+        class="filter__input visually-hidden"
+        name="filter"
+        ${isChecked ? `checked` : ``}
+      />
+      <label for="filter__${name}" class="filter__label">
+        ${name} <span class="filter__all-count">${count}</span></label
+      >
+    `
+  );
+};
+
+const createFilterTemplate = (filters) => {
+  const filterMarkup = filters.map((it, i) => createFilterMarkup(it, i === 0)).join(`\n`);
+
   return (
     `
     <section class="main__filter filter container">
-      <input
-        type="radio"
-        id="filter__all"
-        class="filter__input visually-hidden"
-        name="filter"
-        checked
-      />
-      <label for="filter__all" class="filter__label">
-        All <span class="filter__all-count">13</span></label
-      >
-      <input
-        type="radio"
-        id="filter__overdue"
-        class="filter__input visually-hidden"
-        name="filter"
-        disabled
-      />
-      <label for="filter__overdue" class="filter__label"
-        >Overdue <span class="filter__overdue-count">0</span></label
-      >
-      <input
-        type="radio"
-        id="filter__today"
-        class="filter__input visually-hidden"
-        name="filter"
-        disabled
-      />
-      <label for="filter__today" class="filter__label"
-        >Today <span class="filter__today-count">0</span></label
-      >
-      <input
-        type="radio"
-        id="filter__favorites"
-        class="filter__input visually-hidden"
-        name="filter"
-      />
-      <label for="filter__favorites" class="filter__label"
-        >Favorites <span class="filter__favorites-count">1</span></label
-      >
-      <input
-        type="radio"
-        id="filter__repeating"
-        class="filter__input visually-hidden"
-        name="filter"
-      />
-      <label for="filter__repeating" class="filter__label"
-        >Repeating <span class="filter__repeating-count">1</span></label
-      >
-      <input
-        type="radio"
-        id="filter__archive"
-        class="filter__input visually-hidden"
-        name="filter"
-      />
-      <label for="filter__archive" class="filter__label"
-        >Archive <span class="filter__archive-count">115</span></label
-      >
+      ${filterMarkup}
     </section>`
   );
 };
@@ -267,9 +231,167 @@ const createSiteMenuTemplate = () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTaskEditTemplate", function() { return createTaskEditTemplate; });
-const createTaskEditTemplate = () => {
+const createColorsMarkup = () => {
   return (
-    ` <article class="card card--edit card--yellow card--repeat">
+    `<input
+    type="radio"
+    id="color-black-4"
+    class="card__color-input card__color-input--black visually-hidden"
+    name="color"
+    value="black"
+  />
+  <label
+    for="color-black-4"
+    class="card__color card__color--black"
+    >black</label
+  >
+  <input
+    type="radio"
+    id="color-yellow-4"
+    class="card__color-input card__color-input--yellow visually-hidden"
+    name="color"
+    value="yellow"
+    checked
+  />
+  <label
+    for="color-yellow-4"
+    class="card__color card__color--yellow"
+    >yellow</label
+  >
+  <input
+    type="radio"
+    id="color-blue-4"
+    class="card__color-input card__color-input--blue visually-hidden"
+    name="color"
+    value="blue"
+  />
+  <label
+    for="color-blue-4"
+    class="card__color card__color--blue"
+    >blue</label
+  >
+  <input
+    type="radio"
+    id="color-green-4"
+    class="card__color-input card__color-input--green visually-hidden"
+    name="color"
+    value="green"
+  />
+  <label
+    for="color-green-4"
+    class="card__color card__color--green"
+    >green</label
+  >
+  <input
+    type="radio"
+    id="color-pink-4"
+    class="card__color-input card__color-input--pink visually-hidden"
+    name="color"
+    value="pink"
+  />
+  <label
+    for="color-pink-4"
+    class="card__color card__color--pink"
+    >pink</label
+  >
+    `
+  );
+};
+
+const createRepeatingDaysMarkup = () => {
+  return (
+    ` <input
+    class="visually-hidden card__repeat-day-input"
+    type="checkbox"
+    id="repeat-mo-4"
+    name="repeat"
+    value="mo"
+  />
+  <label class="card__repeat-day" for="repeat-mo-4"
+    >mo</label
+  >
+  <input
+    class="visually-hidden card__repeat-day-input"
+    type="checkbox"
+    id="repeat-tu-4"
+    name="repeat"
+    value="tu"
+    checked
+  />
+  <label class="card__repeat-day" for="repeat-tu-4"
+    >tu</label
+  >
+  <input
+    class="visually-hidden card__repeat-day-input"
+    type="checkbox"
+    id="repeat-we-4"
+    name="repeat"
+    value="we"
+  />
+  <label class="card__repeat-day" for="repeat-we-4"
+    >we</label
+  >
+  <input
+    class="visually-hidden card__repeat-day-input"
+    type="checkbox"
+    id="repeat-th-4"
+    name="repeat"
+    value="th"
+  />
+  <label class="card__repeat-day" for="repeat-th-4"
+    >th</label
+  >
+  <input
+    class="visually-hidden card__repeat-day-input"
+    type="checkbox"
+    id="repeat-fr-4"
+    name="repeat"
+    value="fr"
+    checked
+  />
+  <label class="card__repeat-day" for="repeat-fr-4"
+    >fr</label
+  >
+  <input
+    class="visually-hidden card__repeat-day-input"
+    type="checkbox"
+    name="repeat"
+    value="sa"
+    id="repeat-sa-4"
+  />
+  <label class="card__repeat-day" for="repeat-sa-4"
+    >sa</label
+  >
+  <input
+    class="visually-hidden card__repeat-day-input"
+    type="checkbox"
+    id="repeat-su-4"
+    name="repeat"
+    value="su"
+    checked
+  />
+  <label class="card__repeat-day" for="repeat-su-4"
+    >su</label
+  >
+    `
+  );
+};
+
+const createTaskEditTemplate = (task) => {
+  const {} = task;
+
+  const color = `blue`;
+  const description = `Example default task with default color.`;
+  const date = `23 September`;
+  const time = `16:23`;
+
+  const classRepeat = `card--repeat`;
+  const classDeadline = `card--deadline`;
+  const colorsMarkup = createColorsMarkup();
+  const repeatingDaysMarkup = createRepeatingDaysMarkup();
+
+  return (
+    `<article class="card card--edit card--${color} ${classRepeat} ${classDeadline}">
     <form class="card__form" method="get">
       <div class="card__inner">
         <div class="card__color-bar">
@@ -284,7 +406,7 @@ const createTaskEditTemplate = () => {
               class="card__text"
               placeholder="Start typing your text here..."
               name="text"
-            >Here is a card with filled data</textarea>
+            >${description}</textarea>
           </label>
         </div>
 
@@ -302,7 +424,7 @@ const createTaskEditTemplate = () => {
                     type="text"
                     placeholder=""
                     name="date"
-                    value="23 September 16:15"
+                    value="${date} ${time}"
                   />
                 </label>
               </fieldset>
@@ -313,79 +435,7 @@ const createTaskEditTemplate = () => {
 
               <fieldset class="card__repeat-days">
                 <div class="card__repeat-days-inner">
-                  <input
-                    class="visually-hidden card__repeat-day-input"
-                    type="checkbox"
-                    id="repeat-mo-4"
-                    name="repeat"
-                    value="mo"
-                  />
-                  <label class="card__repeat-day" for="repeat-mo-4"
-                    >mo</label
-                  >
-                  <input
-                    class="visually-hidden card__repeat-day-input"
-                    type="checkbox"
-                    id="repeat-tu-4"
-                    name="repeat"
-                    value="tu"
-                    checked
-                  />
-                  <label class="card__repeat-day" for="repeat-tu-4"
-                    >tu</label
-                  >
-                  <input
-                    class="visually-hidden card__repeat-day-input"
-                    type="checkbox"
-                    id="repeat-we-4"
-                    name="repeat"
-                    value="we"
-                  />
-                  <label class="card__repeat-day" for="repeat-we-4"
-                    >we</label
-                  >
-                  <input
-                    class="visually-hidden card__repeat-day-input"
-                    type="checkbox"
-                    id="repeat-th-4"
-                    name="repeat"
-                    value="th"
-                  />
-                  <label class="card__repeat-day" for="repeat-th-4"
-                    >th</label
-                  >
-                  <input
-                    class="visually-hidden card__repeat-day-input"
-                    type="checkbox"
-                    id="repeat-fr-4"
-                    name="repeat"
-                    value="fr"
-                    checked
-                  />
-                  <label class="card__repeat-day" for="repeat-fr-4"
-                    >fr</label
-                  >
-                  <input
-                    class="visually-hidden card__repeat-day-input"
-                    type="checkbox"
-                    name="repeat"
-                    value="sa"
-                    id="repeat-sa-4"
-                  />
-                  <label class="card__repeat-day" for="repeat-sa-4"
-                    >sa</label
-                  >
-                  <input
-                    class="visually-hidden card__repeat-day-input"
-                    type="checkbox"
-                    id="repeat-su-4"
-                    name="repeat"
-                    value="su"
-                    checked
-                  />
-                  <label class="card__repeat-day" for="repeat-su-4"
-                    >su</label
-                  >
+                 ${repeatingDaysMarkup}
                 </div>
               </fieldset>
             </div>
@@ -394,67 +444,7 @@ const createTaskEditTemplate = () => {
           <div class="card__colors-inner">
             <h3 class="card__colors-title">Color</h3>
             <div class="card__colors-wrap">
-              <input
-                type="radio"
-                id="color-black-4"
-                class="card__color-input card__color-input--black visually-hidden"
-                name="color"
-                value="black"
-              />
-              <label
-                for="color-black-4"
-                class="card__color card__color--black"
-                >black</label
-              >
-              <input
-                type="radio"
-                id="color-yellow-4"
-                class="card__color-input card__color-input--yellow visually-hidden"
-                name="color"
-                value="yellow"
-                checked
-              />
-              <label
-                for="color-yellow-4"
-                class="card__color card__color--yellow"
-                >yellow</label
-              >
-              <input
-                type="radio"
-                id="color-blue-4"
-                class="card__color-input card__color-input--blue visually-hidden"
-                name="color"
-                value="blue"
-              />
-              <label
-                for="color-blue-4"
-                class="card__color card__color--blue"
-                >blue</label
-              >
-              <input
-                type="radio"
-                id="color-green-4"
-                class="card__color-input card__color-input--green visually-hidden"
-                name="color"
-                value="green"
-              />
-              <label
-                for="color-green-4"
-                class="card__color card__color--green"
-                >green</label
-              >
-              <input
-                type="radio"
-                id="color-pink-4"
-                class="card__color-input card__color-input--pink visually-hidden"
-                name="color"
-                value="pink"
-              />
-              <label
-                for="color-pink-4"
-                class="card__color card__color--pink"
-                >pink</label
-              >
+              ${colorsMarkup}
             </div>
           </div>
         </div>
@@ -482,21 +472,35 @@ const createTaskEditTemplate = () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTaskTemplate", function() { return createTaskTemplate; });
-const createTaskTemplate = () => {
+const createTaskTemplate = (task) => {
+  const {} = task;
+
+  const color = `yellow`;
+  const description = `Example default task with default color.`;
+  const date = `23 September`;
+  const time = `16:23`;
+  const isArchive = true;
+  const isFavorite = false;
+
+  const classRepeat = `card--repeat`;
+  const classDeadline = `card--deadline`;
+  const archiveButtonInactiveClass = isArchive ? `` : `card__btn--disabled`;
+  const favoriteButtonInactiveClass = isFavorite ? `` : `card__btn--disabled`;
+
   return (
-    ` <article class="card card--black">
+    `<article class="card card--${color} ${classRepeat} ${classDeadline}">
     <div class="card__form">
       <div class="card__inner">
         <div class="card__control">
           <button type="button" class="card__btn card__btn--edit">
             edit
           </button>
-          <button type="button" class="card__btn card__btn--archive">
+          <button type="button" class="card__btn card__btn--archive ${archiveButtonInactiveClass}">
             archive
           </button>
           <button
             type="button"
-            class="card__btn card__btn--favorites card__btn--disabled"
+            class="card__btn card__btn--favorites ${favoriteButtonInactiveClass}"
           >
             favorites
           </button>
@@ -509,7 +513,7 @@ const createTaskTemplate = () => {
         </div>
 
         <div class="card__textarea-wrap">
-          <p class="card__text">Example default task with default color.</p>
+          <p class="card__text">${description}</p>
         </div>
 
         <div class="card__settings">
@@ -517,8 +521,8 @@ const createTaskTemplate = () => {
             <div class="card__dates">
               <div class="card__date-deadline">
                 <p class="card__input-deadline-wrap">
-                  <span class="card__date">23 September</span>
-                  <span class="card__time">16:15</span>
+                  <span class="card__date">${date}</span>
+                  <span class="card__time"${time}</span>
                 </p>
               </div>
             </div>
@@ -542,12 +546,14 @@ const createTaskTemplate = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_siteMenuTemplate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/siteMenuTemplate.js */ "./src/components/siteMenuTemplate.js");
-/* harmony import */ var _components_filterTemplate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/filterTemplate.js */ "./src/components/filterTemplate.js");
-/* harmony import */ var _components_boardTemplate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/boardTemplate.js */ "./src/components/boardTemplate.js");
-/* harmony import */ var _components_taskEditTemplate_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/taskEditTemplate.js */ "./src/components/taskEditTemplate.js");
-/* harmony import */ var _components_taskTemplate_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/taskTemplate.js */ "./src/components/taskTemplate.js");
-/* harmony import */ var _components_loadBtnTemplate_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/loadBtnTemplate.js */ "./src/components/loadBtnTemplate.js");
+/* harmony import */ var _components_siteMenuTemplate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/siteMenuTemplate.js */ "./src/components/siteMenuTemplate.js");
+/* harmony import */ var _components_filterTemplate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/filterTemplate.js */ "./src/components/filterTemplate.js");
+/* harmony import */ var _components_boardTemplate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/boardTemplate.js */ "./src/components/boardTemplate.js");
+/* harmony import */ var _components_taskEditTemplate_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/taskEditTemplate.js */ "./src/components/taskEditTemplate.js");
+/* harmony import */ var _components_taskTemplate_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/taskTemplate.js */ "./src/components/taskTemplate.js");
+/* harmony import */ var _components_loadBtnTemplate_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/loadBtnTemplate.js */ "./src/components/loadBtnTemplate.js");
+/* harmony import */ var _mock_filter_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/mock/filter.js */ "./src/mock/filter.js");
+/* harmony import */ var _mock_task_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/mock/task.js */ "./src/mock/task.js");
 
 
 
@@ -555,7 +561,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const COUNT_TASK = 3;
+
+
+const TASK_COUNT = 3;
 
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
@@ -565,19 +573,74 @@ const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
 
 render(siteHeaderElement, Object(_components_siteMenuTemplate_js__WEBPACK_IMPORTED_MODULE_0__["createSiteMenuTemplate"])());
-render(siteMainElement, Object(_components_filterTemplate_js__WEBPACK_IMPORTED_MODULE_1__["createFilterTemplate"])());
+
+const filters = Object(_mock_filter_js__WEBPACK_IMPORTED_MODULE_6__["generateFilter"])();
+const tasks = Object(_mock_task_js__WEBPACK_IMPORTED_MODULE_7__["generateTasks"])(TASK_COUNT);
+
+render(siteMainElement, Object(_components_filterTemplate_js__WEBPACK_IMPORTED_MODULE_1__["createFilterTemplate"])(filters));
 render(siteMainElement, Object(_components_boardTemplate_js__WEBPACK_IMPORTED_MODULE_2__["createBoardTemplate"])());
 
 const taskBoard = siteMainElement.querySelector(`.board`);
 const taskBoardList = taskBoard.querySelector(`.board__tasks`);
 
-render(taskBoardList, Object(_components_taskEditTemplate_js__WEBPACK_IMPORTED_MODULE_3__["createTaskEditTemplate"])());
+render(taskBoardList, Object(_components_taskEditTemplate_js__WEBPACK_IMPORTED_MODULE_3__["createTaskEditTemplate"])(tasks[0]));
 
-for (let i = 0; i < COUNT_TASK; i++) {
-  render(taskBoardList, Object(_components_taskTemplate_js__WEBPACK_IMPORTED_MODULE_4__["createTaskTemplate"])());
+for (let i = 1; i < tasks.length; i++) {
+  render(taskBoardList, Object(_components_taskTemplate_js__WEBPACK_IMPORTED_MODULE_4__["createTaskTemplate"])(tasks[i]));
 }
 
 render(taskBoard, Object(_components_loadBtnTemplate_js__WEBPACK_IMPORTED_MODULE_5__["createLoadBtnTemplate"])());
+
+
+/***/ }),
+
+/***/ "./src/mock/filter.js":
+/*!****************************!*\
+  !*** ./src/mock/filter.js ***!
+  \****************************/
+/*! exports provided: generateFilter */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateFilter", function() { return generateFilter; });
+const filterName = [`all`, `overdue`, `today`, `favorites`, `repeating`, `archive`];
+
+const generateFilter = () => {
+  return filterName.map((it) => {
+    return {
+      name: it,
+      count: Math.floor(Math.random() * 48),
+    };
+  });
+};
+
+
+
+/***/ }),
+
+/***/ "./src/mock/task.js":
+/*!**************************!*\
+  !*** ./src/mock/task.js ***!
+  \**************************/
+/*! exports provided: generateTasks, generateTask */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateTasks", function() { return generateTasks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateTask", function() { return generateTask; });
+const generateTask = () => {
+  return {};
+};
+
+const generateTasks = (count) => {
+  return new Array(count)
+  .fill(``)
+  .map(generateTask);
+};
+
+
 
 
 /***/ })
