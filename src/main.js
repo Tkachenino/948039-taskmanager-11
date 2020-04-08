@@ -4,8 +4,12 @@ import {createBoardTemplate} from "@/components/boardTemplate.js";
 import {createTaskEditTemplate} from "@/components/taskEditTemplate.js";
 import {createTaskTemplate} from "@/components/taskTemplate.js";
 import {createLoadBtnTemplate} from "@/components/loadBtnTemplate.js";
+import {generateFilter} from "@/mock/filter.js";
+import {generateTasks} from "@/mock/task.js";
 
-const COUNT_TASK = 3;
+const TASK_COUNT = 20;
+const SHOWING_TASKS_COUNT_ON_START = 8;
+const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
@@ -15,16 +19,35 @@ const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
 
 render(siteHeaderElement, createSiteMenuTemplate());
-render(siteMainElement, createFilterTemplate());
+
+const filters = generateFilter();
+const tasks = generateTasks(TASK_COUNT);
+
+render(siteMainElement, createFilterTemplate(filters));
 render(siteMainElement, createBoardTemplate());
 
 const taskBoard = siteMainElement.querySelector(`.board`);
 const taskBoardList = taskBoard.querySelector(`.board__tasks`);
 
-render(taskBoardList, createTaskEditTemplate());
+render(taskBoardList, createTaskEditTemplate(tasks[0]));
 
-for (let i = 0; i < COUNT_TASK; i++) {
-  render(taskBoardList, createTaskTemplate());
-}
+let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
 
-render(taskBoard, createLoadBtnTemplate());
+tasks.slice(1, showingTasksCount).forEach((task) => render(taskBoardList, createTaskTemplate(task)));
+
+render(taskBoard, createLoadBtnTemplate(), `beforeend`);
+
+const loadBtn = taskBoard.querySelector(`.load-more`);
+
+loadBtn.addEventListener(`click`, () => {
+  const prevTaskCount = showingTasksCount;
+  showingTasksCount = showingTasksCount + SHOWING_TASKS_COUNT_BY_BUTTON;
+
+  tasks.slice(prevTaskCount, showingTasksCount)
+  .forEach((task) => {
+    render(taskBoardList, createTaskTemplate(task));
+  });
+  if (showingTasksCount >= tasks.length) {
+    loadBtn.remove();
+  }
+});
