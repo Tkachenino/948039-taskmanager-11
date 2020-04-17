@@ -1,4 +1,4 @@
-import {createElement} from "@/utils.js";
+import {Component} from "@/utils.js";
 
 const createSiteMenuTemplate = () => {
   return (
@@ -33,24 +33,8 @@ const createSiteMenuTemplate = () => {
   );
 };
 
-export class Menu {
-  constructor() {
-    this._element = null;
-  }
-
+export class Menu extends Component {
   getTemplate() {
     return createSiteMenuTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

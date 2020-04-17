@@ -1,4 +1,4 @@
-import {createElement} from "@/utils.js";
+import {Component} from "@/utils.js";
 
 const createLoadBtnTemplate = () => {
   return (
@@ -6,24 +6,8 @@ const createLoadBtnTemplate = () => {
   );
 };
 
-export class LoadButton {
-  constructor() {
-    this._element = null;
-  }
-
+export class LoadButton extends Component {
   getTemplate() {
     return createLoadBtnTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
