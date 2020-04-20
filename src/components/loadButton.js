@@ -1,4 +1,4 @@
-import {Component} from "@/utils.js";
+import {AbstractComponent as Component} from "@/components/abstractComponent.js";
 
 const createLoadBtnTemplate = () => {
   return (
@@ -9,5 +9,9 @@ const createLoadBtnTemplate = () => {
 export class LoadButton extends Component {
   getTemplate() {
     return createLoadBtnTemplate();
+  }
+
+  setClickHandler(handler) {
+    this.getElement().addEventListener(`click`, handler);
   }
 }
