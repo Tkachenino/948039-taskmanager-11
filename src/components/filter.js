@@ -1,4 +1,4 @@
-import {Component} from "@/utils.js";
+import {AbstractComponent as Component} from "@/components/abstractComponent.js";
 
 const createFilterMarkup = (filter, isChecked) => {
   const {name, count} = filter;
