@@ -3,7 +3,7 @@ import {Filter as FilterComponent} from "@/components/filter.js";
 import {Board as BoardComponent} from "@/components/board.js";
 import {generateFilter} from "@/mock/filter.js";
 import {generateTasks} from "@/mock/task.js";
-import {BoardController} from "@/components/boardController.js";
+import {BoardController} from "@/controllers/board.js";
 import {render, RenderPosition} from "@/utils/render.js";
 
 const TASK_COUNT = 20;
