@@ -2,21 +2,32 @@ import {TaskEdit as TaskEditComponent} from "@/components/taskEdit.js";
 import {Task as TaskComponent} from "@/components/task.js";
 import {render, replace, RenderPosition} from "@/utils/render.js";
 
+const Mode = {
+  DEFAULT: `default`,
+  EDIT: `edit`,
+};
+
 export class TaskController {
-  constructor(container, onDataChange) {
+  constructor(container, onDataChange, onViewChange) {
     this._container = container;
     this._onDataChange = onDataChange;
+    this._onViewChange = onViewChange;
+    this._mode = Mode.DEFAULT;
     this._taskEditComponent = null;
     this._taskComponent = null;
     this._onEscKeyDown = this._onEscKeyDown.bind(this);
   }
 
   _replaceEditToTask() {
+    this._taskEditComponent.reset();
     replace(this._taskComponent, this._taskEditComponent);
+    this._mode = Mode.DEFAULT;
   }
 
   _replaceTaskToEdit() {
+    this._onViewChange();
     replace(this._taskEditComponent, this._taskComponent);
+    this._mode = Mode.DEFAULT;
   }
 
   _onEscKeyDown(evt) {
@@ -29,6 +40,9 @@ export class TaskController {
   }
 
   render(task) {
+    const oldTaskComponent = this._taskComponent;
+    const oldTaskEditComponent = this._taskEditComponent;
+
     this._taskEditComponent = new TaskEditComponent(task);
     this._taskComponent = new TaskComponent(task);
 
@@ -55,6 +69,17 @@ export class TaskController {
       }));
     });
 
-    render(this._container, this._taskComponent, RenderPosition.BEFOREEND);
+    if (oldTaskComponent && oldTaskEditComponent) {
+      replace(this._taskComponent, oldTaskComponent);
+      replace(this._taskEditComponent, oldTaskEditComponent);
+    } else {
+      render(this._container, this._taskComponent, RenderPosition.BEFOREEND);
+    }
+  }
+
+  setDefaultView() {
+    if (this._mode !== Mode.DEFAULT) {
+      this._replaceEditToTask();
+    }
   }
 }
