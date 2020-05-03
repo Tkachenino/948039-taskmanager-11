@@ -27,7 +27,7 @@ export class TaskController {
   _replaceTaskToEdit() {
     this._onViewChange();
     replace(this._taskEditComponent, this._taskComponent);
-    this._mode = Mode.DEFAULT;
+    this._mode = Mode.EDIT;
   }
 
   _onEscKeyDown(evt) {
