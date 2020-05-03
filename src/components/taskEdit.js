@@ -1,6 +1,9 @@
 import {COLORS, DAYS, MONTH_NAMES} from "@/const.js";
 import {formatTime} from "@/utils/common.js";
 import {AbstractSmartComponent as Component} from "@/components/abstractSmartComponent.js";
+import flatpickr from "flatpickr";
+
+import "flatpickr/dist/flatpickr.min.css";
 
 const isRepeating = (repeatingDays) => {
   return Object.values(repeatingDays).some(Boolean);
@@ -141,6 +144,7 @@ export class TaskEdit extends Component {
   constructor(task) {
     super();
     this._task = task;
+    this._faltpickr = null;
 
     this._isDateShowing = !!task.dueDate;
     this._isRepeatingClass = Object.values(task.repeatingDays).some(Boolean);
@@ -148,6 +152,7 @@ export class TaskEdit extends Component {
     this._submitHandler = null;
 
     this._subscribeOnEvents();
+    this._applyFlatpickr();
   }
 
   getTemplate() {
@@ -202,6 +207,20 @@ export class TaskEdit extends Component {
         this._activeRepeatingDays[evt.target.value] = evt.target.checked;
 
         this.rerender();
+      });
+    }
+  }
+
+  _applyFlatpickr() {
+    if (this._faltpickr) {
+      this._faltpickr.destroy();
+      this._faltpickr = null;
+    }
+
+    if (this._isDateShowing) {
+      const dateElement = this.getElement().querySelector(`.card__date`);
+      this._faltpickr = flatpickr(dateElement, {
+
       });
     }
   }
