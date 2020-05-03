@@ -220,7 +220,11 @@ export class TaskEdit extends Component {
     if (this._isDateShowing) {
       const dateElement = this.getElement().querySelector(`.card__date`);
       this._faltpickr = flatpickr(dateElement, {
-
+        altInput: true,
+        enableTime: true,
+        allowInput: true,
+        altFormat: `d F H:i`,
+        defaultDate: this._task.dueDate || `today`,
       });
     }
   }
