@@ -36,7 +36,6 @@ export class TaskController {
       this._replaceEditToTask();
       document.removeEventListener(`keydown`, this._onEscKeyDown);
     }
-
   }
 
   render(task) {
@@ -48,7 +47,7 @@ export class TaskController {
 
     this._taskComponent.setEditButtonClickHandler(() => {
       this._replaceTaskToEdit();
-      document.onkeydown = this._onEscKeyDown;
+      document.addEventListener(`keydown`, this._onEscKeyDown);
     });
 
     this._taskEditComponent.setSubmitHandler((evt) => {
