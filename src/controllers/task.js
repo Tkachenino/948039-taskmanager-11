@@ -34,7 +34,7 @@ export class TaskController {
     const isEscKey = evt.key === `Escape`;
     if (isEscKey) {
       this._replaceEditToTask();
-      document.removeEventListener(`keydown`, this._onEscKeyDowm);
+      document.removeEventListener(`keydown`, this._onEscKeyDown);
     }
 
   }
@@ -48,13 +48,13 @@ export class TaskController {
 
     this._taskComponent.setEditButtonClickHandler(() => {
       this._replaceTaskToEdit();
-      document.onkeydown = this._onEscKeyDowm;
+      document.onkeydown = this._onEscKeyDown;
     });
 
     this._taskEditComponent.setSubmitHandler((evt) => {
       evt.preventDefault();
       this._replaceEditToTask();
-      document.removeEventListener(`keydown`, this._onEscKeyDowm);
+      document.removeEventListener(`keydown`, this._onEscKeyDown);
     });
 
     this._taskComponent.setFavoritesButtonClickHandler(() => {
