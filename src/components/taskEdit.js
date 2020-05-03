@@ -1,6 +1,9 @@
-import {COLORS, DAYS, MONTH_NAMES} from "@/const.js";
-import {formatTime} from "@/utils/common.js";
+import {COLORS, DAYS} from "@/const.js";
+import {formatTime, formatDate} from "@/utils/common.js";
 import {AbstractSmartComponent as Component} from "@/components/abstractSmartComponent.js";
+import flatpickr from "flatpickr";
+
+import "flatpickr/dist/flatpickr.min.css";
 
 const isRepeating = (repeatingDays) => {
   return Object.values(repeatingDays).some(Boolean);
@@ -55,7 +58,7 @@ const createTaskEditTemplate = (task, option = {}) => {
   const isBlockSaveButton = (isDateShowing && isRepeatingClass) ||
     (isRepeatingClass && !isRepeating(activeRepeatingDays));
 
-  const date = (isDateShowing && dueDate) ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
+  const date = (isDateShowing && dueDate) ? formatDate(dueDate) : ``;
   const time = (isDateShowing && dueDate) ? formatTime(dueDate) : ``;
 
   const classRepeat = isRepeatingClass ? `card--repeat` : ``;
@@ -141,6 +144,7 @@ export class TaskEdit extends Component {
   constructor(task) {
     super();
     this._task = task;
+    this._faltpickr = null;
 
     this._isDateShowing = !!task.dueDate;
     this._isRepeatingClass = Object.values(task.repeatingDays).some(Boolean);
@@ -148,6 +152,7 @@ export class TaskEdit extends Component {
     this._submitHandler = null;
 
     this._subscribeOnEvents();
+    this._applyFlatpickr();
   }
 
   getTemplate() {
@@ -202,6 +207,24 @@ export class TaskEdit extends Component {
         this._activeRepeatingDays[evt.target.value] = evt.target.checked;
 
         this.rerender();
+      });
+    }
+  }
+
+  _applyFlatpickr() {
+    if (this._faltpickr) {
+      this._faltpickr.destroy();
+      this._faltpickr = null;
+    }
+
+    if (this._isDateShowing) {
+      const dateElement = this.getElement().querySelector(`.card__date`);
+      this._faltpickr = flatpickr(dateElement, {
+        altInput: true,
+        enableTime: true,
+        allowInput: true,
+        altFormat: `d F H:i`,
+        defaultDate: this._task.dueDate || `today`,
       });
     }
   }

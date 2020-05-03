@@ -27,16 +27,15 @@ export class TaskController {
   _replaceTaskToEdit() {
     this._onViewChange();
     replace(this._taskEditComponent, this._taskComponent);
-    this._mode = Mode.DEFAULT;
+    this._mode = Mode.EDIT;
   }
 
   _onEscKeyDown(evt) {
     const isEscKey = evt.key === `Escape`;
     if (isEscKey) {
       this._replaceEditToTask();
-      document.removeEventListener(`keydown`, this._onEscKeyDowm);
+      document.removeEventListener(`keydown`, this._onEscKeyDown);
     }
-
   }
 
   render(task) {
@@ -48,13 +47,13 @@ export class TaskController {
 
     this._taskComponent.setEditButtonClickHandler(() => {
       this._replaceTaskToEdit();
-      document.onkeydown = this._onEscKeyDowm;
+      document.addEventListener(`keydown`, this._onEscKeyDown);
     });
 
     this._taskEditComponent.setSubmitHandler((evt) => {
       evt.preventDefault();
       this._replaceEditToTask();
-      document.removeEventListener(`keydown`, this._onEscKeyDowm);
+      document.removeEventListener(`keydown`, this._onEscKeyDown);
     });
 
     this._taskComponent.setFavoritesButtonClickHandler(() => {
