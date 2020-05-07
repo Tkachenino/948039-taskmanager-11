@@ -1,9 +1,10 @@
 import {formatTime, formatDate} from "@/utils/common.js";
 import {AbstractComponent as Component} from "@/components/abstractComponent.js";
+import {encode} from "he";
 
 const createTaskTemplate = (task) => {
-  const {description, dueDate, repeatingDays, color, isFavorite, isArchive} = task;
-
+  const {description: notSanitizedDescription, dueDate, repeatingDays, color, isFavorite, isArchive} = task;
+  const description = encode(notSanitizedDescription);
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
 
