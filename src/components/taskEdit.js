@@ -221,8 +221,8 @@ export class TaskEdit extends Component {
 
   getData() {
     const form = this.getElement().querySelector(`.card__form`);
-    const formData = new FormData(form);
 
+    const formData = new FormData(form);
     return parseFormData(formData);
   }
 
@@ -269,7 +269,6 @@ export class TaskEdit extends Component {
     if (repeatDays) {
       repeatDays.addEventListener(`change`, (evt) => {
         this._activeRepeatingDays[evt.target.value] = evt.target.checked;
-
         this.rerender();
       });
     }
