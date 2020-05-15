@@ -84,7 +84,6 @@ export class TaskController {
     this._taskEditComponent.setSubmitHandler((evt) => {
       evt.preventDefault();
       const data = this._taskEditComponent.getData();
-      console.log(data);
       this._onDataChange(this, task, data);
       document.removeEventListener(`keydown`, this._onEscKeyDown);
     });

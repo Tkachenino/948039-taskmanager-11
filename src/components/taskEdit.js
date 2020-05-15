@@ -158,6 +158,7 @@ const parseFormData = (formData) => {
   const date = formData.get(`date`);
 
   return {
+    id: Math.random(),
     description: formData.get(`text`),
     color: formData.get(`color`),
     dueDate: date ? new Date(date) : null,
