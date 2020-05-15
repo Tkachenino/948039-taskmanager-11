@@ -9,6 +9,7 @@ import {Tasks as TasksModel} from "@/models/tasks.js";
 import {Statistics as StatisticsComponent} from "@/components/statistics.js";
 
 const AUTHORIZATION = `Basic Sdakld3qm5qwinV2`;
+const END_POINT = `https://11.ecmascript.pages.academy/task-manager`;
 
 // const TASK_COUNT = 2;
 
@@ -21,7 +22,7 @@ const dateFrom = (() => {
 
 
 // const tasks = generateTasks(TASK_COUNT);
-const api = new API(AUTHORIZATION);
+const api = new API(END_POINT, AUTHORIZATION);
 const tasksModel = new TasksModel();
 
 // tasksModel.setTasks(tasks);
@@ -33,7 +34,7 @@ const statisticsComponent = new StatisticsComponent({tasks: tasksModel, dateFrom
 
 
 const boardComponent = new BoardComponent();
-const boardController = new BoardController(boardComponent, tasksModel);
+const boardController = new BoardController(boardComponent, tasksModel, api);
 const filterController = new FilterController(siteMainElement, tasksModel);
 
 render(siteHeaderElement, SiteMenuComponent, RenderPosition.BEFOREEND);
